@@ -1,0 +1,10 @@
+.miktex-sandbox/
+**/.miktex-sandbox/
+
+# Office temporary lock files
+~$*
+**/~$*
+
+# Notebook autosave folders
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/

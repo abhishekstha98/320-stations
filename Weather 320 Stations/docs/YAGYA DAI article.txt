@@ -1,0 +1,743 @@
+PAPER • OPEN ACCESS                                                                              You may also like
+                                                                                                     - Determinants of crop insurance
+Recent advances in electrical engineering:                                                             participation of farming households in
+                                                                                                       Mekong River Delta, Vietnam in climate
+exploring graph neural networks for weather                                                            change context
+                                                                                                       Do Huong Lan, Dinh Duc Truong, Bui Thi
+                                                                                                       Hoang Lan et al.
+prediction in data-scarce environments
+                                                                                                     - Modeling spatiotemporal land use/land
+                                                                                                       cover dynamics by coupling multilayer
+To cite this article: Harish Chandra Bhandari et al 2024 Environ. Res. Commun. 6 105010                perceptron neural network and cellular
+                                                                                                       automata markov chain algorithms in the
+                                                                                                       Wabe river catchment, Omo Gibe River
+                                                                                                       Basin, Ethiopia
+                                                                                                       Yonas Mathewos, Brook Abate, Mulugeta
+                                                                                                       Dadi et al.
+View the article online for updates and enhancements.
+                                                                                                     - Green finance, sustainable infrastructure,
+                                                                                                       and green technology innovation:
+                                                                                                       pathways to achieving sustainable
+                                                                                                       development goals in the belt and road
+                                                                                                       initiative
+                                                                                                       Shahid Mahmood, Huaping Sun, Asifa
+                                                                                                       Iqbal et al.
+
+
+
+
+                             This content was downloaded from IP address 103.184.139.2 on 16/12/2025 at 04:50
+                             Environ. Res. Commun. 6 (2024) 105010                                                        https://doi.org/10.1088/2515-7620/ad8108
+
+
+
+
+                             PAPER
+
+                             Recent advances in electrical engineering: exploring graph neural
+OPEN ACCESS
+                             networks for weather prediction in data-scarce environments
+RECEIVED
+25 May 2024
+                             Harish Chandra Bhandari1             , Yagya Raj Pandeya2,3, Kanhaiya Jha1 and Sudan Jha∗,2
+REVISED                      1
+25 August 2024
+                               Department of Mathematics, School of Science, Kathmandu University, Nepal
+                             2
+                               Department of Computer Science and Engineering, School of Engineering, Kathmandu University, Nepal
+ACCEPTED FOR PUBLICATION     3
+                               Guru Technology Pvt. Ltd., Kathmandu, Nepal
+27 September 2024            ∗
+                               Author to whom any correspondence should be addressed.
+PUBLISHED
+14 October 2024              E-mail: harish.bhandari@ku.edu.np, jhakn@ku.edu.np, yagya.pandeya@ku.edu.np and jhasudan@hotmail.com
+
+                             Keywords: features, Initialize, empty, graph neural networks, weather prediction, data science, meteorological understanding
+Original content from this
+work may be used under
+the terms of the Creative
+Commons Attribution 4.0     Abstract
+licence.
+Any further distribution of In regions like Nepal, characterized by diverse geography, missing weather data poses a signiﬁcant
+this work must maintain
+attribution to the
+                            challenge for traditional imputation methods. These methods often struggle to capture the complex-
+author(s) and the title of  ities of dynamic environments adequately. To overcome this challenge, our study explores the
+the work, journal citation
+and DOI.                    application of graph neural networks for weather prediction in data-scarce environments. Our
+                            approach entails the development of specialized models tailored to accommodate the non-Euclidean
+                            topology inherent in weather data. This framework encompasses preprocessing, graph representation,
+                            feature selection, and imputation techniques to predict missing atmospheric variables. The
+                            adaptability of our models to intricate geography ensures more precise representations of weather
+                            conditions. Our research demonstrates the efﬁcacy of these models through rigorous testing on a
+                            substantial dataset spanning four decades since 1981. By harnessing state-of-the-art graph neural
+                            network technology, our study aims to address existing gaps in weather data prediction, leading to
+                            improved historical weather forecasting accuracy. Ultimately, this advancement contributes to
+                            enhanced meteorological understanding and forecasting precision in data-scarce regions.
+
+
+                             1. Introduction
+
+                             In this global climate change scenario, the importance of accurate weather predictions is increasing. An
+                             abnormal weather condition, such as cold weather, heavy snow, heavy rain, and drought, occur more frequently
+                             worldwide. Weather change has a direct negative impact on daily quality of life, agriculture systems [1, 2], crop
+                             management, energy utilization [3], image denoising [4], industries [5], the tourism industry [6], transportation
+                             and logistics [7]. In the global scenario of agricultural landscape, weather-dependent decisions determine crop
+                             yields and food production. Similarly, energy grids and utility systems are highly sensitive to weather
+                             ﬂuctuations. Inaccurate forecasts can strain these systems, culminating in costly outages, infrastructure damage,
+                             and disruptions in energy supply to homes and industries. Moreover, the transportation industry hinges on
+                             timely and precise weather information for route planning, safety precautions, and minimizing disruptions due
+                             to adverse weather conditions.
+                                 There is a range of techniques and approaches for predicting atmospheric variables using various machine
+                             learning and statistical methods. Existing weather forecasting models are based on physics and use
+                             supercomputers to evolve the atmosphere in the future. To minimize this computational cost, several deep-
+                             learning techniques have been proposed over the last few decades to forecast meteorological information. Some
+                             recent methods are heatwave prediction [8], air temperature forecasting [9], high-resolution prediction of
+                             spatiotemporal distribution of air pollution [10], precipitation prediction at a high resolution up to 12 hours
+                             ahead [11], and rainfall prediction models [12–14]. GNN-based methods have demonstrated exceptional
+                             performance in handling non-Euclidean weather data [15, 16]. Recently, GRAST [17] and HiSTGNN [18] have
+                             introduced GNNs designed for multi-station weather forecasting, addressing the need for enhanced modeling of
+
+                             © 2024 The Author(s). Published by IOP Publishing Ltd
+Environ. Res. Commun. 6 (2024) 105010                                                               H C Bhandari et al
+
+
+
+interactions among meteorological variables from various stations. Besides forecasting the future, sometimes it
+is essential to compute the missing atmospheric variable using other environmental factors. The speciﬁc variable
+could be missed due to the absence or malfunction of the measuring device.
+     Here we present a neural network to predict the current value of a speciﬁc atmospheric variable using other
+environmental factors. Probabilistic forecasts predict the likelihood of weather conditions at a given time and
+location. We proposed a Graph Neural Network (GNN) to classify the range of core atmospheric variables such
+as rainfall, temperature, humidity, and air pressure using other correlated environmental variables. For the
+atmospheric variables, a probabilistic outcome answers the question, “What is the range of probability of a given
+variable occurring at a location and time based on other correlated environmental factors?”
+     In developing countries, weather observations often include missing values, especially in diverse regions like
+Nepal, where the plains, hills, and Himalayas create distinct climatic zones within short distances. These gaps,
+caused by equipment malfunctions or human error, necessitate weather imputation, which estimates missing
+data using techniques such as graph neural networks [19–21], regression trees, artiﬁcial neural networks [22],
+rain gauge estimation [23], spatial-correlation approaches [24], statistical imputation with quality control
+measures [25], and machine learning [26, 27]. Recent methods like ARIMA [20], LSTM [19], BiLSTM [28],
+sequential imputation [29], dynamic time warping [30], and edge cutting [31] have further advanced this ﬁeld.
+Weather imputation is crucial for maintaining continuous, reliable datasets and supporting decision-making in
+weather-sensitive activities [45]. However, methods like Numerical Weather Prediction (NWP) [32] and
+interpolation [33] face challenges, including capturing complex weather phenomena, handling sparse data, and
+managing the resource demands of these techniques [34].
+     In this work, we introduce ImputeCast, a groundbreaking machine learning paradigm designed to tackle the
+dual challenge of imputing partially missing attributes and predicting the range of entirely missing features.
+Leveraging two distinct approaches, graph diffusion and graph neural networks (GNN), the method operates on
+a systematically designed graph topology to enhance imputation accuracy. The graph diffusion technique
+exploits information propagation across interconnected nodes, while the GNN approach harnesses neural
+networks to capture intricate patterns in graph-structured data.
+     The major contributions of this paper are as follows:
+
+• We introduce a novel weather data imputation method that opens up new research avenues.
+• Our approach leverages Graph Neural Network (GNN) technology to predict missing atmospheric variables
+  by utilizing other environmental features. We outline a comprehensive GNN processing pipeline,
+  encompassing data preparation, feature selection, and neural network optimization.
+• This study presents a novel GNN architecture, speciﬁcally the GraphSAGE network, tailored for predicting
+  missing weather data attributes, including rainfall, temperature, humidity, and atmospheric pressure, using
+  available weather information. The GNN demonstrates proﬁciency in handling all four atmospheric variables
+  while achieving a commendable level of accuracy.
+• We introduced a feature selection method based on Pearson's correlation coefﬁcient that found comparatively
+  better than the conventional approach.
+
+
+2. Materials and methods
+
+2.1. Dataset and preprocessing
+Nepal's geographical landscapes exhibit a remarkable diversity in weather patterns and climate ﬂuctuations.
+Spanning from the lowlands of Kechana Kalan, located at a modest elevation of 60 meters above sea level, to the
+awe-inspiring heights of Mount Everest, the world's tallest peak towering at an astonishing 8,848 meters, the
+country encompasses an astounding spectrum of altitudes. This geographical diversity encompasses an
+extraordinary range of climatic nuances and meteorological phenomena. Within this work, we utilized historical
+weather data sourced from 62 weather stations strategically distributed across diverse geographical regions
+within Nepal. This dataset covers a time span of 39 years, encompassing daily weather records from January 1,
+1981, through December 31, 2019. Remarkably, this dataset encompasses more than 883K data samples, making
+it the most extensive and publicly available meteorological dataset [35, 36] within our knowledge. The dataset
+comprised of several attributes, namely PRECTOT: Precipitation (mm/day) PS: Surface Pressure (kPa), QV2M:
+Speciﬁc Humidity at 2 Meters (g/kg), RH2M: Relative Humidity at 2 Meters (%), T2M: Temperature at 2 Meters
+(C), T2MWET: Wet Bulb Temperature at 2 Meters (C), T2M_MAX: Maximum Temperature at 2 Meters (C),
+T2M_MIN: Minimum Temperature at 2 Meters (C), T2M_RANGE: Temperature Range at 2 Meters (C),TS:
+Earth Skin Temperature (C), WS10M: Wind Speed at 10 Meters (m/s), WS10M_MAX: Maximum Wind Speed
+
+
+                                              2
+Environ. Res. Commun. 6 (2024) 105010                                                                   H C Bhandari et al
+
+
+
+at 10 Meters (m/s), WS10M_MIN: Minimum Wind Speed at 10 Meters (m/s), WS10M_RANGE: Wind Speed
+Range at 10 Meters (m/s),WS50M: Wind Speed at 50 Meters (m/s), WS50M_MAX: Maximum Wind Speed at
+50 Meters (m/s), WS50M_MIN: Minimum Wind Speed at 50 Meters (m/s), WS50M_RANGE: Wind Speed
+Range at 50 Meters (m/s).
+     The dataset we used contains no missing values initially. However, we hypothesize that missing values are a
+common occurrence in many datasets. To test the efﬁcacy of our model, we applied a random ﬁlter to
+deliberately remove portions of the available data. This approach allows us to simulate missing data scenarios
+and evaluate how well the model performs under these conditions.
+     Following the dataset declaration, we proceed by representing the 62 weather stations as individual nodes
+within a graph. These nodes are connected by edges, which are established based on similarities in altitude and
+proximity to neighboring stations. We prepared the data to address a classiﬁcation problem involving four
+atmospheric variables, each with its speciﬁc prediction range. Rainfall is classiﬁed into two categories, either
+present or absent, while temperature is segmented into six distinct classes ranging from freezing to very hot.
+Similarly, humidity is categorized into four classes—dry, moderate, humid, and very humid—while pressure is
+stratiﬁed into four levels: very low, low, moderate, and high. In the dataset, the maximum temperature recorded
+is 36°C. Accordingly, we categorized temperatures into the following ranges: below 0°C as freezing, 0–10°C as
+cold, 10–18°C as cool, 18–25°C as moderate, 25–30°C as hot, and above 30°C as very hot. Similarly, humidity is
+categorized into ranges of less than 40%, 40–60%, 60–80%, and above 80%. For pressure, the categories are less
+than 70 kPa, 70–80 kPa, 80–90 kPa, and 90-100 kPa. While the categorization process may seem random, it is
+purposeful and not arbitrary. Several studies underscore the importance of considering a broader spectrum of
+weather variables. To understand the dynamics of vector-borne diseases [37, 38], diseases on plant and
+vegetables [39], crop production prediction [40], minimizing extensive use of limited resources [41] utilities of
+above categories is crucial.
+
+2.2. Graph representation of weather data
+A graph is a kind of non-Euclidean data structure which shows the relationship between entities; such entities
+are known as the nodes and relationships are the edges of the graph. Formally, a graph can be deﬁned as
+G = (V, E) where V = {v1, v2, K, vn} is the set of n vertices and E = {e1, e2, K, em}is the set of m edges. If the edges
+on the graph are directed from one node to another, then the graph formed is the directed graph. Also, if the
+strengths of the relationships between nodes are not the same, such graphs are weighted graphs. The
+graph deﬁned above is an undirected and unweighted graph. In this weather imputation and missing variable
+prediction task, we used weighted undirected graph, which is mathematically represented as G = (V, E, W)
+where V is the set of vertices, E is the set of edges, and W is a matrix of size |V| × |V| representing the strength of
+edges. In a graph signal processing task, a graph signal (graph feature) is a real mapping deﬁned on the
+graph vertices V and edge weight (a real mapping on V × V ) is the connection strength of the vertices of the
+graph. The matrix form of the edge weight is the weighted adjacency matrix W, D Î ∣ V ∣ ´ ∣ V ∣ , Dii = Sj wij is the
+degree matrix of W, W˜ = D- 2 WD- 2 is the normalized weighted adjacency matrix and D = I - W˜ is the
+                                 1       1
+
+
+graph Laplacian matrix.
+    In our approach, we conceptualize these weather stations as the nodes (vertices) of a graph, and the
+connections between these nodes represent the edges. These edges facilitate the exchange of information
+between the nodes, and weights are assigned to them to quantify the strength of the connection between any two
+nodes. Importantly, our edge formulation takes into account both spatial and temporal aspects. By considering
+both spatial relationships and temporal order in the edges, our approach provides a more comprehensive
+framework for analyzing and understanding meteorological data, allowing us to capture both the physical
+proximity of weather stations and the chronological sequence of events in our analysis.
+
+2.2.1. Spatial edge construction
+Spatial edges represent relationships between nodes based on spatial proximity or physical distance. These edges
+form when nodes are physically close or share spatial traits, such as altitude. The altitude-based edges align with
+the hypothesis that locations at similar altitudes exhibit similar weather, including temperature variations due to
+the lapse rate. The degree of similarity between nodes is determined by this altitude-based criterion
+
+                                                                1
+                                                Sij =
+                                                        ∣A (i ) - A ( j )∣
+
+ where A(i) is the altitude of node i and Sij is the similarity score between node i and node j and is the edge weight
+for edge (i, j).
+    Inspired from the concept of neutrasoﬁc relation [42], neighborhood-based edges are created based on the
+proximity principle, with edge weight determined by
+
+                                                3
+Environ. Res. Commun. 6 (2024) 105010                                                                                      H C Bhandari et al
+
+
+
+
+  Figure 1. Left: The spatial graph depicts various weather stations across Nepal. In this representation, dots signify the locations of
+  sensors, while the lines connecting these dots are established according to similarities in both neighborhood proximity and altitude.
+  Right: The graph illustrates the spatiotemporal conﬁguration of weather stations. Different sensor nodes for weather data collection
+  are denoted by varying colors. Light blue edges represent spatial connections, while gray edges indicate temporal connections.
+
+
+                                                                         1
+                                                             wij =
+                                                                      g (i , j )
+
+where g(i, j) is the geodesic distance between node i and j.
+   In both scenarios, a threshold is applied to maintain sparsity, and when both spatial methods establish
+connections between nodes, the edge weight is the maximum of Sij and wij.
+
+2.2.2. Temporal edge construction
+Temporal edges establish time-based relationships between nodes, connecting data from the same station at
+consecutive points for enhanced temporal dependency and its weight tij is considered to be one.
+    The weather data we have used is the temporal data, so to leverage the temporal information, spatial graphs
+for every temporal point t = 1, 2, K, T are stacked and consecutive temporal points on the same station are
+connected by an edge.
+    The full lines in the graph indicate the spatial edges and the dotted lines indicate temporal edges. Therefore,
+the graph obtained,called weather imputation graph (WIG), will have n × T nodes where n is the number of
+weather stations and T is the length of temporal points. Furthermore, the size of the WIG is |E| = |ES| + |ET|,
+where |ET| = n × (T − 1) is the number of temporal edges and |ES| is the number of spatial edges which is T ×
+the number of edges on a spatial graph at a temporal point. Figure 1 gives a brief overview of the spatio-temporal
+graph representing the weather stations and its temporal form.
+
+2.3. Graph weather feature imputation
+Graph-based weather feature imputation stands as a central focus of this research, where the task involves ﬁlling
+in the missing weather features Xm using the available features Xh. We employed the graph-based heat diffusion
+method [43] for weather data imputation. The imputation technique is based on the prior that weather features
+are similar in nearby geographical locations, areas of similar altitude, and at consecutive time intervals.
+    This can be quantiﬁed with the help of graph Dirichlet energy
+                                                        1            1
+                                           EG ( f ) = 2 f T Df = 2 Si, j w˜ ij ( fi - f j )2                                               (1)
+
+ where w̃ij is the individual entries of normalized weighted adjacency matrix and fi if the features at node i. The
+Dirichlet energy (1) is used to measure the smoothness of weather data stored on the nodes on the weather
+imputation graph. That means the neighboring weather data encoded by weather imputation graph structure
+are similar. Thus, we will learn missing weather data from its neighboring nodes.
+    In the WIG, the total vertices V can be partitioned as V = Vh ∪ Vm, where Vh is the set of nodes i.e. weather
+stations where the features are present at hand and Vm is the set of weather stations in which weather feature is
+                                                          f
+missing. Then weather feature can be written as f = ⎡ h ⎤ where fh is the weather feature at hand and fm is the
+                                                       ⎢ fm ⎥
+                                                       ⎣ ⎦
+missing weather feature. Furthermore, the weighted adjacency matrix and graph Laplacian are respectively
+
+                                                        4
+Environ. Res. Commun. 6 (2024) 105010                                                              H C Bhandari et al
+
+
+
+                                                       W Whm ⎤
+                                                  W = ⎡ hh                                                       (2)
+                                                       W
+                                                      ⎣ mh Wmm ⎦
+    and
+
+                                                        D  Dhm ⎤
+                                                  D = ⎡ hh                                                       (3)
+                                                      ⎢ D
+                                                      ⎣ mh D mm ⎥
+                                                                ⎦
+
+     The weather feature imputation means we are attempting to ﬁnd the missing weather feature fm with the help
+of feature at hand fh. We do so by message passing scheme in the graph via weighted normalized adjacency
+matrix until graph Dirichlet energy EG( f ) is minimized. The closed form solution of the minimizer of Dirichlet
+energy is possible [43] but lacks computational efﬁciency, so it is better to use gradient ﬂow
+
+                                                       f = - EG ( f )
+
+as graph heat diffusion differential equation with initial condition as
+
+                                                                   f
+                                                       f (0) = ⎡ h ⎤
+                                                               ⎢ fm (0)⎥
+                                                               ⎣       ⎦
+
+and boundary condition as the feature at hand fh(t) = fh. At the same time, gradient ﬂow of feature at hand fh
+shold not be changing over time, so
+
+                                                            fh = 0
+
+With this and above initial and boundary conditions, change can only be applied to missing weather feature fm
+and can be modeled as
+
+                                           fm (t ) = - (Dmh fh + Dmm fm (t ))                                   (4)
+
+Euler iterative scheme [43] for solving this is combined as
+
+                                                    I    0 ⎤ (i - 1)
+                                        f (i ) = ⎡ ˜    ˜mm f        i = 1, 2, 3,¼                               (5)
+                                                 ⎣W  mh W  ⎦
+
+which is the required weather data imputation scheme and it update only missing weather feature fm.
+
+
+3. Node feature selection method
+
+In the context of graph-based weather data processing, the careful choice of node features holds the potential to
+signiﬁcantly reduce computational costs and enhance model efﬁciency. Feature selection reduces
+dimensionality, accelerates model training, and enhances interpretability. This process not only improves the
+accuracy of predictions, beneﬁting weather forecasting and spatial data analysis, but also ﬁlters out noise and
+ensures that computational resources are used efﬁciently.
+    In the study [44], Genetic algorithm (GA) emerged as a more efﬁcient method than Wrapper approaches for
+rainfall prediction. Malathi et al,malathi2020feature conducted a comprehensive analysis of various weather
+feature selection strategies, including Information Gain (IG), Chi-Square (CS), Symmetric Uncertainty (SU),
+Ant Colony Optimization (ACO), Particle Swarm Optimization (PSO), and GA, concluding that the selection of
+these methods should be based on factors such as simplicity, stability, feature reduction, accuracy, and
+computational efﬁciency. The correlation based feature selection [46] was used for precipitation type prediction.
+However, it's essential to note that many of these methods require substantial domain knowledge and, in some
+instances, signiﬁcant computational resources. In response, we have developed a straightforward yet highly
+effective feature selection strategy using a statistical approach—Pearson's correlation coefﬁcient. This metric
+allowed us to quantify the degree of linear association between each feature and the speciﬁc meteorological
+parameter we sought to predict. The detail description can be found in algorithm 1.
+
+
+
+                                                   5
+Environ. Res. Commun. 6 (2024) 105010                                                                                     H C Bhandari et al
+
+
+
+
+  Figure 2. Frequency distribution of correlation coefﬁcients of weather attributes with temperature, rainfall, humidity, and
+  atmospheric pressure.
+
+
+
+
+Algorithm 1 Input:
+
+• Raw Data: Different temporal weather information of different locations
+• x: Target variable
+• Top Number: Number of top features to select (e.g., 6)
+
+• Top Features: List of the top 6 feature names by frequency
+
+• Output: Initialize an empty list feature_list to store feature names.
+• Find locations from Raw Data
+• For each location in locations, do the following:
+   a. Calculate features for the current location: f1, f2, K, fn = calculate_features(location)
+   b. Calculate feature-target correlations: r1, r2, K, rn = calculate_correlations ([f1, f2, K, fn], x)
+   c. Find  the   top     num_top         features       with  highest                        correlations:        top_features          =
+      ﬁnd_top_features([f1, f2, K, fn], [r1, r2, K, rn], num_top)
+   d. Add the top correlated feature names to feature_list: feature_list.extend(top_features)
+• Create a dictionary feature_count to store feature frequency counts.
+
+                                                        6
+Environ. Res. Commun. 6 (2024) 105010                                                                               H C Bhandari et al
+
+
+
+
+  Figure 3. Top: The diagram illustrates the proposed weather imputation network (WIN) framework. The raw data is ﬁrst represented
+  as a graph which may have missing node features. RGB colors in boxes indicate the presence of features and White color indicates
+  missed features. Then the graph heat diffusion method is applied to impute missing features before sending it to Graph Neural
+  Network (GNN) to predict missing features using available meteorological information. Middle: The ﬁgure shows the model of
+  ImputeCast for node prediction. Bottom: The ﬁgure on the right illustrates the sampling of neighbors of the green node. The red
+  nodes indicate immediate neighbors, and the purple nodes indicate neighbors of neighbors. The ﬁgure on left illustrates the
+  computation graph for message passing and aggregation method for GraphSAGE convolution.
+
+
+
+• For each feature in feature_list, do the following:
+   a. If the feature is not in feature_count, add it with a count of 1.
+   b. If the feature is already in feature_count, increment its count by 1.
+• Sort feature_count by frequency in descending order.
+• Select the top 6 feature names based on frequency: top_features = top_n_keys(feature_count, num_top)
+• Return top_features, which contains the top 6 feature names by frequency.
+
+     The initial dataset contains weather information from 62 weather stations in Nepal, comprising 21 different
+features. For each of the four prediction tasks (rainfall, temperature, humidity, and atmospheric pressure), we
+computed Pearson's correlation coefﬁcients between all available features and the respective meteorological
+parameter. The aim is to reconstruct the data with minimal information. Therefore, we selected the top six
+features using Algorithm-I, and this number serves as a hyper-parameter. Through the utilization of Algorithm-
+I, the six most pertinent features have been identiﬁed for various weather aspects: temperature (WS10M, RH2M,
+PS, T2MWET, WS50M and QV2M), rainfall (RH2M, T2M, PS, T2MWET, WS50M_MIN and QV2M),
+Humidity (PRECTOT, T2M, T2MWET, WS10M_RANGE, WS50M_RANGE and WS10M_MAX), and
+
+
+                                                     7
+Environ. Res. Commun. 6 (2024) 105010                                                                                                 H C Bhandari et al
+
+
+
+Table 1. Summary of weather prediction.
+
+Temperature
+Prediction
+
+                  0%                    30%                          60%                         90%
+Class
+            Pre        Rec       F1           Pre             Rec            F1           Pre            Rec         F1       Pre       Rec         F1
+
+0          0.95        0.94      0.94         0.92            0.90          0.91          0.89           0.86        0.87     0.81      0.77       0.79
+1          0.93        0.93      0.93         0.88            0.89          0.88          0.83           0.84        0.84     0.74      0.73       0.74
+2          0.93        0.92      0.93         0.87            0.87          0.87          0.81           0.81        0.81     0.70      0.74       0.72
+3          0.91        0.91      0.91         0.86            0.84          0.85          0.79           0.79        0.79     0.70      0.67       0.69
+4          0.87        0.89      0.88         0.81            0.85          0.83          0.75           0.79        0.77     0.65      0.72       0.68
+5          0.85        0.81      0.83         0.80            0.68          0.74          0.73           0.57        0.64     0.65      0.35       0.45
+
+
+Humidity Prediction
+Class                  0%                         30%                        60%                        90%
+                  Pre          Rec          F1          Pre           Rec           F1           Pre          Rec       F1     Pre       Rec        F1
+0                 0.84         0.83        0.84         0.80          0.71         0.75          0.74         0.58     0.65    0.63      0.41      0.49
+1                 0.85         0.88        0.86         0.77          0.84         0.81          0.70         0.81     0.75    0.59      0.78      0.67
+2                 0.75         0.70        0.73         0.65          0.61         0.63          0.56         0.52     0.54    0.46      0.32      0.38
+3                 0.87         0.87        0.87         0.82          0.80         0.81          0.78         0.73     0.75    0.65      0.62      0.63
+
+
+
+Pressure Prediction
+Class                  0%                        30%                        60%                         90%
+                   Pre        Rec          F1          Pre           Rec            F1           Pre          Rec       F1     Pre       Rec        F1
+0                 0.97        0.97        0.97         0.96          0.97          0.96          0.96         0.96     0.96    0.94      0.93      0.93
+1                 0.93        0.93        0.93         0.91          0.92          0.91          0.89         0.90     0.89    0.83      0.87      0.85
+2                 0.94        0.92        0.93         0.92          0.89          0.90          0.90         0.86     0.88    0.86      0.80      0.83
+3                 0.98        0.99        0.99         0.97          0.98          0.98          0.96         0.98     0.97    0.95      0.96      0.97
+
+
+
+Rainfall Prediction
+Class                  0%                        30%                        60%                         90%
+                   Pre        Rec          F1          Pre           Rec            F1          Pre           Rec       F1     Pre       Rec        F1
+0                 0.90        0.90        0.90         0.88          0.89          0.88         0.86          0.88     0.87    0.81      0.88      0.84
+1                 0.78        0.78        0.78         0.75          0.73          0.74         0.72          0.67     0.70    0.67      0.56      0.61
+
+
+
+
+Atmospheric Pressure (T2MWET, WS50M, WS50M_MAX, WS10M, QV2M and T2M). The ﬁgure 2 provides a
+visual representation of the frequency distribution of the selected features.
+
+
+4. Network architecture
+
+In the work for missing atmospheric variable prediction, we employed several variants of Graph Neural
+Networks (GNN). These encompass Graph Convolutional Networks (GCN), renowned for their ability to
+capture local graph structure; GraphSAGE (Graph Sample and Aggregated Embeddings) [47], which adeptly
+samples and aggregates information from neighboring nodes; Graph Attention Networks (GAT), leveraging
+attention mechanisms to weigh node importance; and a hybrid approach known as SAGE-GAT, combining
+both sampling and attention-based aggregation techniques. These distinct networks exhibit the ability to
+capture both local and global dependencies within the atmospheric data graph, contributing to precise
+predictions of missing atmospheric variables. In the context of predicting missing weather data variables,
+GraphSAGE consistently outperforms other classiﬁers in all scenarios. Consequently, our subsequent discussion
+predominantly focuses on the SAGE neural network for classifying the range of missing atmospheric variables.
+GraphSAGE generates node embedding in a graph by sampling neighboring nodes and aggregating their
+features. It uses a ﬁxed number of neighboring nodes (neighbor sampling) for each node in the graph, ensuring
+consistent computational and memory requirements regardless of graph size. It then combines these
+neighboring node features to create embedding for the target node. These embedding are learned and optimized
+during training to capture meaningful representations of graph nodes in a lower-dimensional space.
+Mathematically, let hvl- 1 be embedding of a node v at layer l − 1, then embedding of the node v at layer l is given
+by
+
+                                                          8
+Environ. Res. Commun. 6 (2024) 105010                                                                               H C Bhandari et al
+
+
+
+
+  Figure 4. Accuracy curves for different prediction tasks: Humidity, Temperature, Rainfall and Pressure with SAGE, GCN, GAT and
+  SAGE-GAT against data missing rates.
+
+
+
+                                h vl = s ([Wl.AGG ({hul- 1, " u Î (v )}) + Bl h vl- 1])                                           (6)
+
+ where Wl.AGG ({hul- 1, " u Î  (v )}) is the neighbor embedding and Bl hvl- 1 is the self embedding of node v.
+Here, Wl and Bl are the learnable parameters that controls how much information from neighboring nodes and
+node v itself should be taken for lower dimensional representation for the node v. Moreover, AGG is aggregation
+function given by
+                                                                         h vl- 1
+                                                 AGG = å uÎ (v )                                                                  (7)
+                                                                       ∣ (v )∣
+ ﬁgure 3 illustrates the process of sampling and aggregation by message passing scheme of GraphSAGE
+convolutional neural network. Our approach begins by constructing a spatio-temporal graph topology,
+capturing intricate relationships over time. In the subsequent phase, we systematically assign diverse node
+features, each represented by a unique color, tailored to speciﬁc prediction tasks.
+
+
+5. Experiments and results
+
+In order to ensure the comprehensibility and comparability of our research ﬁndings across different research
+groups, we consistently present our experimental data in both visual and statistical formats. In this study, we
+employed GCNs for imputing missing weather data and identifying absent atmospheric variables within a
+speciﬁc range. This was accomplished by leveraging available meteorological data. We utilized several GNN
+classiﬁers to predict missing variables, including temperature, humidity, air pressure, and rainfall. In the
+experiment, we employed Pearson's correlation coefﬁcients for feature selection, optimizing the identiﬁcation
+of these four crucial meteorological parameters. Our investigation involved testing our proposed system across
+various missing data rates, even up to 90%, and the results demonstrated a high classiﬁcation score. To
+quantitatively and qualitatively validate our ﬁndings, we employed a range of metrics [48], including accuracy,
+F1-score, confusion matrix, Receiver Operating Characteristic (ROC) score, and t-SNE (t-Distributed Stochastic
+Neighbor Embedding) plots. The confusion matrix proved valuable for reporting results in multi-class
+
+                                                     9
+Environ. Res. Commun. 6 (2024) 105010                                                                               H C Bhandari et al
+
+
+
+
+  Figure 5. Confusion matrix on humidity, temperature, pressure, and rainfall prediction on 0%, 30%, 60%, and 90% missing data,
+  respectively.
+
+
+
+classiﬁcation scenarios. Additionally, the area under the ROC curve (AUC) helped assess the degree of
+separability across multiple classiﬁcation thresholds. Finally, t-SNE emerged as a valuable tool for data
+exploration, visualization, informed decision-making, enhanced model performance, and effective
+communication of our research outcomes.
+    An ideal imputation method is one that effectively learns to restore the original relationships within a dataset
+[49]. As discussed in section 1, several methods are proposed over time to achieve the ideal imputation and
+graph-based imputation approach is found more efﬁcient for temporal data [50]. A graph-based representation
+to the temporal context is crucial to maintain temporal dynamics, ensuring that the resulting representation
+preserves the inherent relationships between features and labels over time [51]. Utilizing the strength of graph,
+we adopted a graph-based feature imputation approach using a diffusion scheme. In this process, we allow a
+maximum of 30 iterations for the features to propagate throughout the dataset. Following the imputation phase,
+we employ a three-layer Graph Neural Network (GNN) model. We trained the GNN classiﬁers; described in
+section 4; using a large meteorological data of approximately 39 years sourced from 62 weather stations located
+in Nepal. During training, an early stopping with a patience of 200 epochs was implemented to mitigate
+overﬁtting. To construct the graph dataset and leverage graph neural networks, we utilized the PyG (PyTorch
+Geometric) library, accessible at https://pytorch-geometric.readthedocs.io/. The model training and inference
+were executed on hardware equipped with an NVIDIA GeForce RTX 3080Ti and an Intel i7-11700k@3.60 GHz
+processor. In this experiment, we evaluated and compared the performance of various graph network
+architectures, such as GCN, GAT, SAGE, and SAGE-GAT. The results of our experiments as illustrated in
+Table 1, focusing on humidity, temperature, rainfall, and pressure prediction under different levels of missing
+data, are illustrated in ﬁgure 4. Remarkably, GraphSAGE consistently exhibits superior performance compared
+to the other classiﬁers in most test cases. As a result, we focus our subsequent experimental analysis on this
+superior classiﬁer.
+    The confusion matrix included in ﬁgure 5 also support our hypothesis that the proposed method is robust to
+the missing data imputation. The GraphSAGE classiﬁer demonstrates robustness in predicting temperature,
+even when dealing with a large number of classes. However, its performance is suboptimal when predicting
+rainfall, despite the binary classiﬁcation task of ‘Rainfall’ or ‘not-Rainfall.’ Across all atmospheric variable range
+
+                                                     10
+Environ. Res. Commun. 6 (2024) 105010                                                                               H C Bhandari et al
+
+
+
+
+  Figure 6. ROC AUC curves for different prediction tasks: Humidity, Temperature, Rainfall, and Pressure with 0%, 30%, 60%, and
+  90% missing data.
+
+
+
+classiﬁcations, the classiﬁer exhibits notable confusion, particularly among adjacent classes. For example, in
+humidity classiﬁcation, it tends to confuse ‘dry’ and ‘moderate’ classes, ‘moderate’ and ‘humid’ classes, as well as
+‘humid’ and ‘very humid’ classes. While some level of confusion is expected, the results for rainfall prediction are
+relatively poor, indicating that predicting rainfall is one of the most challenging aspects of weather prediction.
+    The ROC curve in ﬁgure 6 presents the macro-average of ROC-AUC scores across all classes while
+considering different data availability scenarios, which include full data availability (100%), 70% data
+availability, 40% data availability, and a minimal 10% data availability. Our research ﬁndings indicate that the
+ROC-AUC values remain notably high, even when only 10% of the data is accessible, demonstrating the
+robustness and effectiveness of the proposed model.
+
+
+6. Conclusion
+
+As mentioned in the introduction, existing methods primarily focus on grid-based structures, which struggle
+with sparse weather station data, and one of the widely used NWP methods is heavily inﬂuenced by initial data,
+making it unsuitable for simultaneous spatial and temporal data gaps. Additionally, these methods do not
+account for dependent weather variables when imputing missing data. Our method, which integrates
+graph diffusion to handle randomly missing independent variables and utilizes Graph Neural Networks (GNNs)
+to forecast the ranges of key weather attributes like temperature, rainfall, humidity, and pressure, presents a
+noteworthy advancement in meteorological modeling tailored for data-sparse environments. By introducing a
+
+                                                     11
+Environ. Res. Commun. 6 (2024) 105010                                                                                    H C Bhandari et al
+
+
+
+novel feature selection approach based on correlation coefﬁcients, we further reﬁne the precision and relevance
+of our methodology in weather data analysis. Extensively trained on a comprehensive and diverse
+meteorological dataset encompassing various altitudes and geographic locations, our model demonstrates
+robustness. Signiﬁcantly, it achieves remarkable evaluation scores both in the presence and absence of weather
+attributes, validating the effectiveness and versatility of our approach. Thorough validation through statistical
+analyses and graphical assessments, employing a range of tailored metrics for classiﬁcation problems,
+strengthens the credibility of our method and signiﬁes a substantial step forward in improving the accuracy and
+reliability of weather attribute predictions in data-sparse regions.
+
+
+Data availability statement
+
+No new data were created or analysed in this study.
+
+
+ORCID iDs
+
+Harish Chandra Bhandari https://orcid.org/0000-0002-0136-264X
+Sudan Jha https://orcid.org/0000-0003-0074-2584
+
+References
+ [1] Talib M N A, Ahmed M, Naseer M M, Slusarczyk B and Popp J 2021 The long-run impacts of temperature and rainfall on agricultural
+     growth in sub-saharan africa Sustainability 13 595
+ [2] Zemicheal T and Dietterich T G 2019 Anomaly detection in the presence of missing values for weather data quality control in
+     Proceedings of the 2nd ACM SIGCAS Conference on Computing and Sustainable Societies COMPASS '19: ACM SIGCAS Conference on
+     Computing and Sustainable Societies Accra Ghana July 3 - 5, 2019 65–73
+ [3] Kim T, Ko W and Kim J 2019 Analysis and impact evaluation of missing data imputation in day-ahead pv generation forecasting Appl.
+     Sci. 9 204
+ [4] Kapoor R, Gupta R, Son L H, Kumar R and Jha S 2019 Fog removal in images using improved dark channel prior and contrast limited
+     adaptive histogram equalization Multimedia Tools and Applications 78 281–23
+ [5] Shakya S R and Jha S 2022 Challenges in industrial internet of things (iiot) in Industrial Internet of Things (CRC Press) 19–39
+ [6] Parasyris A, Alexandrakis G, Kozyrakis G V, Spanoudaki K and Kampanis N A 2022 Predicting meteorological variables on local level
+     with sarima, lstm and hybrid techniques Atmosphere 13 878
+ [7] Li J, Wu P, Guo H, Li R, Li G and Xu L 2023 Multivariate transfer passenger ﬂow forecasting with data imputation by joint deep learning
+     and matrix factorization Applied Sciences 13 5625
+ [8] Li P, Yu Y, Huang D, Wang Z-H and Sharma A 2023 Regional heatwave prediction using graph neural network and weather station
+     data Geophysical Research Letters 50 e2023GL103405
+ [9] Tran T T K, Bateni S M, Ki S J and Vosoughifar H 2021 A review of neural networks for air temperature forecasting Water 13 1294
+[10] Tao H, Jawad A H, Shather A, Al-Khafaji Z, Rashid T A, Ali M, Al-Ansari N, Marhoon H A, Shahid S and Yaseen Z M 2023 Machine
+     learning algorithms for high-resolution prediction of spatiotemporal distribution of air pollution from meteorological and soil
+     parameters Environment international 175 107931
+[11] Espeholt L et al 2022 Deep learning for twelve hour precipitation forecasts Nature communications 13 1–10
+[12] Khan M I and Maity R 2020 Hybrid deep learning approach for multi-step-ahead daily rainfall prediction using gcm simulations IEEE
+     Access 8 774–52
+[13] Barrera-Animas A Y, Oyedele L O, Bilal M, Akinosho T D, Delgado J M D and Akanbi L A 2022 Rainfall prediction: A comparative
+     analysis of modern machine learning algorithms for time-series forecasting Machine Learning with Applications 7 100204
+[14] Yen M-H, Liu D-W, Hsin Y-C, Lin C-E and Chen C-C 2019 Application of the deep learning for the prediction of rainfall in southern
+     taiwan Scientiﬁc reports 9 12774
+[15] Wu Z, Pan S, Long G, Jiang J, Chang X and Zhang C 2020 Connecting the dots: Multivariate time series forecasting with graph neural
+     networks in Proceedings of the 26th ACM SIGKDD international conference on knowledge discovery & data mining 753–63
+[16] Bai L, Yao L, Li C, Wang X and Wang C 2020 Adaptive graph convolutional recurrent network for trafﬁc forecasting Advances in neural
+     information processing systems 33 17804–15
+[17] Lira H, Martì L and Sanchez-Pi N 2022 A graph neural network with spatio-temporal attention for multi-sources time series data: An
+     application to frost forecast Sensors 22 1486
+[18] Ma M, Xie P, Teng F, Wang B, Ji S, Zhang J and Li T 2022 Available at SSRN 4455568 Histgnn: Hierarchical spatio-temporal graph neural
+     network for weather forecasting 648 119580
+[19] Park I, Kim H S, Lee J, Kim J H, Song C H and Kim H K 2019 Temperature prediction using the missing data reﬁnement model based
+     on a long short-term memory neural network Atmosphere 10 718
+[20] Afrifa-Yamoah E, Mueller U A, Taylor S and Fisher A 2020 Missing data imputation of high-resolution temporal climate time series
+     data Meteorological Applications 27 e1873
+[21] Zuo J, Zeitouni K, Taher Y and Garcia-Rodriguez S 2023 Graph convolutional networks for trafﬁc forecasting with missing values Data
+     Mining and Knowledge Discovery 37 913–47
+[22] Kim J-W and Pachepsky Y A 2010 Reconstructing missing daily precipitation data using regression trees and artiﬁcial neural networks
+     for swat streamﬂow simulation Journal of hydrology 394 305–14
+[23] Nourani V, Baghanam A H and Gebremichael M 2012 Investigating the ability of artiﬁcial neural network (ann) models to estimate
+     missing rain-gauge data Journal of Environmental Informatics 19
+[24] Teegavarapu R S 2014 Statistical corrections of spatially interpolated missing precipitation data estimates Hydrological Processes 28
+     3789–808
+
+
+                                                        12
+Environ. Res. Commun. 6 (2024) 105010                                                                                     H C Bhandari et al
+
+
+
+[25] Ferrari G T and Ozaki V 2014 Missing data imputation of climate datasets: Implications to modeling extreme drought events Revista
+     Brasileira de Meteorologia 29 21–8
+[26] Alsaber A R, Pan J and Al-Hurban A 2021 Handling complex missing data using random forest approach for an air quality monitoring
+     dataset: a case study of kuwait environmental data (2012 to 2018) International Journal of Environmental Research and Public Health
+     18 1333
+[27] Jordanov I, Petrov N and Petrozziello A 2018 Classiﬁers accuracy improvement based on missing data imputation Journal of Artiﬁcial
+     Intelligence and Soft Computing Research 8 31–48
+[28] Xie C, Huang C, Zhang D and He W 2021 Bilstm-i: A deep learning-based long interval gap-ﬁlling method for meteorological
+     observation data International Journal of Environmental Research and Public Health 18 10321
+[29] Mital U, Dwivedi D, Brown J B, Faybishenko B, Painter S L and Steefel C I 2020 Sequential imputation of missing spatio-temporal
+     precipitation data using random forests Frontiers in Water 2 20
+[30] Sanhudo L, Rodrigues J and Filho E V 2021 Multivariate time series clustering and forecasting for building energy analysis: Application
+     to weather data quality control Journal of Building Engineering 35 101996
+[31] Guastella D A, Marcillaud G and Valenti C 2021 Edge-based missing data imputation in large-scale environments Information 12 195
+[32] Bauer P, Thorpe A and Brunet G 2015 The quiet revolution of numerical weather prediction Nature 525 47–55
+[33] Morales Martìnez J L, Horta-Rangel F A, Segovia-Domìnguez I, Robles Morua A and Hernández J H 2019 Analysis of a new spatial
+     interpolation weighting method to estimate missing data applied to rainfall records Atm ósfera 32 237–59
+[34] Al-Yahyai S, Charabi Y and Gastli A 2010 Review of the use of numerical weather prediction (nwp) models for wind energy assessment
+     Renewable and Sustainable Energy Reviews 14 3192–8
+[35] https://opendatanepal.com/dataset/district-wise-daily-climate-data-for-nepal
+[36] NASA 2023 Nasa power data access viewer
+[37] Bu J, Peng D-D, Xiao H, Yue Q, Han Y, Lin Y, Hu G and Chen J 2020 Analysis of meteorological conditions and prediction of epidemic
+     trend of 2019-ncov infection in 2020 MedRxiv 2020–2
+[38] Islam M A, Sangkham S, Tiwari A, Vadiati M, Hasan M N, Noor S T A, Mumin J, Bhattacharya P and Sherchan S P 2022 Association
+     between global monkeypox cases and meteorological factors International Journal of Environmental Research and Public Health 19
+     15638
+[39] Lal M, Sharma S, Yadav S and Kumar S 2018 Management of late blight of potato Potato-From Incas to All Over the World 83–106
+[40] Rajagopal A, Jha S, Khari M, Ahmad S, Aloufﬁ B and Alharbi A 2021 A novel approach in prediction of crop production using recurrent
+     cuckoo search optimization neural networks Applied Sciences 11 9816
+[41] Jha S, Nkenyereye L, Joshi G P and Yang E 2020 Mitigating and monitoring smart city using internet of things Computers, Materials &
+     Continua 65 1059–79
+[42] Jha S, Joshi G P, Nkenyereya L, Kim D W and Smarandache F 2020 A direct data-cluster analysis method based on neutrosophic set
+     implication Inﬁnite Study 65 1203–1220
+[43] Rossi E, Kenlay H, Gorinova M I, Chamberlain B P, Dong X and Bronstein M M 2022 On the unreasonable effectiveness of feature
+     propagation in learning on graphs with missing node features in Learning on Graphs Conference 11–1
+[44] Seo J-H et al 2014 Feature selection for very short-term heavy rainfall prediction using evolutionary computation Advances in
+     Meteorology 2014
+[45] Malathi T and Manimekalai M 2020 Feature selection techniques for weather forecasting models using machine learning techniques
+     Journal of Electrical Engineering and Technology 11 443–55
+[46] Moon S-H and Kim Y-H 2020 An improved forecast of precipitation type using correlation-based feature selection and multinomial
+     logistic regression Atmospheric Research 240 104928
+[47] Hamilton W, Ying Z and Leskovec J 2017 Inductive representation learning on large graphs Advances in neural information processing
+     systems 30
+[48] Singh D et al 2023 Lumbar spine disease detection: Enhanced cnn model with improved classiﬁcation accuracy IEEE Access 11
+     141889–141901
+[49] Yoon J 2020 University of California End-to-end machine learning frameworks for medicine: data imputation, model interpretation and
+     synthetic data generation (ProQuest LLC)
+[50] Gordon D, Petousis P, Zheng H, Zamanzadeh D and Bui A A 2021 Tsi-gnn: Extending graph neural networks to handle missing data in
+     temporal settings Frontiers in big Data 4 693869
+[51] Meng X-L 1994 Multiple-imputation inferences with uncongenial sources of input Statistical science 9 538–58
+
+
+
+
+                                                        13
+

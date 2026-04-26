@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Proposal Defense Questions and Answers</title>
+<style>
+body { font-family: Segoe UI, Arial, sans-serif; max-width: 960px; margin: 40px auto; line-height: 1.55; padding: 0 24px; color: #1f2933; }
+h1, h2, h3 { line-height: 1.25; color: #102a43; }
+code { background: #eef2f7; padding: 0.1rem 0.25rem; border-radius: 4px; }
+hr { border: 0; border-top: 1px solid #d9e2ec; margin: 28px 0; }
+</style>
+</head>
+<body>
+<h1>Proposal Defense Questions and Answers</h1>
+<h2>How to Use This File</h2>
+<p>This file is tailored to the updated proposal defense presentation in <code>Proposal Defense.pptx</code>.</p>
+<p>Each question includes:</p>
+<ul>
+<li><strong>Short answer</strong>: a quick response for viva or slide-by-slide defense</li>
+<li><strong>Expanded answer</strong>: a slightly fuller version for follow-up questions</li>
+</ul>
+<p>The answers are written to stay consistent with the revised proposal and the current evidence-based thesis framing:</p>
+<ul>
+<li>the statement of problem is grounded in the recent Nepal-focused paper by <strong>Bhandari et al. (2024)</strong></li>
+<li>the core contribution is the <strong>correlation-adaptive weather forecasting backbone</strong></li>
+<li>crop recommendation is treated as <strong>future integration / downstream application</strong></li>
+<li>comparative claims are framed carefully unless fully supported by evidence</li>
+</ul>
+<hr>
+<h2>1. Opening and Overview</h2>
+<h3>Q1. What is your proposed research about?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My proposed research is about improving weather forecasting in complex mountainous terrain by connecting weather stations using historical signal similarity instead of only geographic distance.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The research proposes a correlation-adaptive weather graph for 320 stations and uses that graph inside a Spatio-Temporal Graph Convolutional Network, or STGCN. The goal is to produce more meaningful local forecasts in terrain where nearby stations may behave very differently because of topography.</p>
+<h3>Q2. What is the title of your proposal?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The title is <strong>Correlation-Adaptive Weather Graph Modeling for Precision Crop Recommendation in Complex Mountain Terrain</strong>.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The title reflects two layers of the work. The immediate technical contribution is correlation-adaptive weather graph modeling, and the broader motivation is to support precision agriculture and future crop advisory systems in mountainous regions.</p>
+<h3>Q3. What is the main idea of your proposal in one sentence?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The main idea is that weather stations in mountains should be connected by meteorological similarity, not by map distance alone.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Traditional distance-based graphs assume nearby stations are similar, but this is often false in complex terrain. My proposal replaces that assumption with a graph built from historical correlation between station time series.</p>
+<h3>Q4. Why is this topic important?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It is important because local weather strongly affects agriculture, planning, and risk management, especially in complex terrain where microclimates are common.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>In Nepal and similar regions, temperature, humidity, and rainfall can change sharply over short distances. If local weather is poorly estimated, then downstream decisions such as planting, irrigation, and hazard preparedness also become less reliable.</p>
+<h3>Q4a. Which recent paper is used as the foundation for your problem statement?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I use Bhandari et al. (2024), published in *Environmental Research Communications*, as the recent Nepal-specific foundation.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The paper is titled <strong>&quot;Recent advances in electrical engineering: exploring graph neural networks for weather prediction in data-scarce environments.&quot;</strong> It is suitable because it is recent, Nepal-focused, and directly discusses graph neural networks for weather prediction and missing atmospheric variables in data-scarce environments. My work builds on that direction but extends the framing to a 320-station STGCN forecasting setup.</p>
+<hr>
+<h2>2. Background and Motivation</h2>
+<h3>Q5. Why is weather forecasting difficult in mountainous terrain?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because mountains create microclimates through elevation differences, ridges, valleys, slope aspect, and rain-shadow effects.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Two stations that are close on a map may still experience very different temperatures, humidity, and rainfall because of terrain barriers and local circulation. That makes simple spatial smoothness assumptions unreliable.</p>
+<h3>Q6. What do you mean by the &#226;€œdistance trap&#226;€?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The distance trap is the problem of assuming that geographically close stations are always meteorologically similar.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>In flat regions that assumption may work reasonably well, but in mountains it can be misleading. A ridge can separate two nearby stations into very different weather regimes, while two distant valleys may still behave similarly.</p>
+<h3>Q7. Why is geographic distance alone not enough in your study?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because geographic closeness does not always reflect atmospheric similarity in complex terrain.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>A distance-based graph can force the model to aggregate information from physically close but behaviorally dissimilar stations. That can introduce noise into forecasting rather than useful spatial context.</p>
+<h3>Q8. Why is Nepal or a similar mountainous setting a good study context?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It is a strong study context because terrain variation is high and the weakness of distance-based assumptions becomes very visible.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Nepal contains large elevation changes over short horizontal distances, so it is an ideal environment for testing whether functional connectivity is more meaningful than physical proximity. If the method works in such terrain, it has relevance for other mountainous regions too.</p>
+<hr>
+<h2>3. Research Gap and Objectives</h2>
+<h3>Q9. What research gap are you addressing?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The gap is the lack of a transparent, correlation-driven graph construction strategy for weather forecasting in complex terrain.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Many spatio-temporal graph forecasting methods still use fixed distance-based adjacency. My proposal addresses the need for a graph that reflects actual historical station behavior rather than only physical closeness.</p>
+<h3>Q10. What is your general objective?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My general objective is to design and evaluate a weather forecasting framework for complex terrain using correlation-defined station connectivity.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal aims to improve how spatial relationships are represented inside a forecasting model. Instead of starting from geographic distance, I define connectivity from historical signal similarity and use that structure within an STGCN.</p>
+<h3>Q11. What are your specific objectives?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My specific objectives are to build the correlation-adaptive graph, prepare the forecasting data, implement the STGCN, compare it with a distance-based graph, and position the forecasts for future crop advisory use.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>More specifically, I will construct a graph for 320 stations using absolute Pearson correlation, create 43-lag inputs with a 7-step horizon, predict <code>T2M_MIN</code>, <code>RH2M</code>, and <code>PRECTOTCORR</code>, compare correlation and distance graph settings, and discuss how the outputs can support downstream agricultural systems.</p>
+<h3>Q12. What is your main hypothesis?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My hypothesis is that a correlation-based station graph better represents complex terrain relationships than a purely distance-based graph.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>If the graph structure is closer to real meteorological affinity, then the model should learn more meaningful spatial patterns. That should improve the quality and interpretability of forecasting in mountainous terrain.</p>
+<hr>
+<h2>4. Dataset and Inputs</h2>
+<h3>Q13. What data are you using?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I am using a 320-station weather dataset with multivariate daily weather records and supporting processed graph artifacts.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal is centered on a 320-station workflow with historical weather variables, graph tensors, normalization statistics, and inference/test artifacts. The broader repository also includes the long historical archive used to motivate graph construction and forecasting.</p>
+<h3>Q14. Why did you choose 320 stations?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because 320 stations provide wide spatial coverage while still being computationally manageable for graph-based modeling.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>This station count gives a substantial node network for learning inter-station relationships. At the same time, it remains practical for preprocessing, graph construction, training, and evaluation within the current project scope.</p>
+<h3>Q15. What are the input features to the model?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The active pipeline uses 14 weather features including temperature, humidity, precipitation, pressure, and wind variables.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>These include variables such as <code>T2M</code>, <code>T2MWET</code>, <code>TS</code>, <code>T2M_MAX</code>, <code>T2M_MIN</code>, <code>RH2M</code>, <code>PRECTOTCORR</code>, <code>PS</code>, and wind measurements at 10 m and 50 m. This gives the model broader atmospheric context than relying on a single feature.</p>
+<h3>Q16. What are your forecast target variables?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The target variables are <code>T2M_MIN</code>, <code>RH2M</code>, and <code>PRECTOTCORR</code>.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>These correspond to minimum temperature, relative humidity, and corrected precipitation. They were selected because they are meteorologically important and also highly relevant for future agricultural interpretation.</p>
+<h3>Q17. Why are these three variables important?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because they are directly relevant to moisture conditions, and rainfall availability.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Minimum temperature relates to cold stress and frost risk, humidity relates to moisture conditions and disease environment, and precipitation affects irrigation and water availability. Together they provide a practical weather profile for downstream decision support.</p>
+<h3>Q18. What is the temporal forecasting setup?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The model uses 43 past time steps as input and predicts 7 future steps.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>This means the forecasting problem is multi-step rather than single-step. The 43-lag input provides enough temporal context, while the 7-step horizon gives a short-term outlook that can be operationally useful.</p>
+<hr>
+<h2>5. Graph Construction</h2>
+<h3>Q19. What is a graph in your study?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>A graph is a network where weather stations are nodes and the relationships between stations are edges.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The graph defines how information flows between stations during the spatial part of the model. Instead of hard-coding those relationships by distance alone, I estimate them from historical station similarity.</p>
+<h3>Q20. How do you construct the correlation-adaptive graph?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I compute pairwise absolute Pearson correlations between station <code>T2M</code> time series and use those values as edge weights.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>First, the station histories are arranged into a time-by-station matrix. Then I compute the Pearson correlation for each station pair, take the absolute value, and keep the strongest connections after sparsification.</p>
+<h3>Q21. Why did you use Pearson correlation?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because it is a simple and interpretable way to measure how strongly two station signals co-vary over time.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Pearson correlation is a practical first measure of functional similarity. It gives a transparent statistical basis for graph construction and is easy to explain, reproduce, and analyze.</p>
+<h3>Q22. Why did you use the absolute value of correlation?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because strong negative correlation can still indicate a meaningful meteorological relationship.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>In mountains, some stations may be strongly anti-correlated because of inversions, slope differences, or local circulation effects. Taking the absolute value preserves the strength of relationship rather than treating anti-correlation as no connection.</p>
+<h3>Q23. Why did you use `T2M` for graph construction?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because <code>T2M</code> is a strong, widely available signal and serves as a practical proxy for station similarity.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Temperature at 2 meters is informative, stable, and directly used in the implemented graph-construction logic. It provides a simple and evidence-based basis for defining connectivity before expanding to more complex multi-variable graph definitions in future work.</p>
+<h3>Q24. What does top-33% sparsification mean?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It means I keep only the strongest one-third of pairwise correlation values as graph edges.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Without sparsification, the graph becomes too dense and may contain many weak or noisy connections. Keeping the top 33% helps preserve the strongest functional relationships while reducing noise and computational burden.</p>
+<h3>Q25. Why is sparsification necessary?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because a dense graph can introduce noise and make message passing less meaningful.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>If every station is connected to too many weak neighbors, the graph loses selectivity. Sparsification makes the graph more informative by emphasizing the strongest and most relevant relationships.</p>
+<hr>
+<h2>6. Model and Methodology</h2>
+<h3>Q26. Why did you choose STGCN?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because STGCN can model both temporal dependence and spatial dependence in graph-structured time series.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Weather forecasting across stations has both time dynamics and inter-station relationships. STGCN is appropriate because it combines temporal convolution with graph convolution in a unified framework.</p>
+<h3>Q27. What is the architecture of your proposed model?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It is a three-block STGCN followed by a linear output head.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal uses three ST-Conv blocks with temporal kernel sizes 9, 7, and 5, along with graph convolution orders 4, 4, and 3. The final linear layer maps the learned representation to the three forecast targets.</p>
+<h3>Q28. Why did you choose three ST-Conv blocks?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because they allow the model to progressively learn spatio-temporal patterns at multiple levels.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Using multiple blocks helps the model capture both short and somewhat broader temporal dependencies while repeatedly passing information through the graph. It creates a deeper representation than a single graph-temporal block.</p>
+<h3>Q29. Why do the temporal kernels decrease from 9 to 7 to 5?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because the model first captures broader temporal structure and then refines it at smaller scales.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The larger initial kernel helps the network detect broader weather evolution patterns, while smaller later kernels operate on increasingly compressed representations. This staged design is physically and computationally reasonable for the forecasting task.</p>
+<h3>Q30. What does Chebyshev order 4, 4, and 3 mean?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It determines how many graph hops the convolution can aggregate over in each ST-Conv block.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Higher Chebyshev order allows each graph convolution to capture information from a wider neighborhood. In my model, the first two blocks use order 4 and the third uses order 3, giving strong spatial aggregation while keeping the model tractable.</p>
+<h3>Q31. How does the graph help the model?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The graph tells the model which stations should exchange information during spatial learning.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Instead of treating all stations as independent or using only nearest geography, the graph guides message passing according to learned similarity structure. This helps the model exploit meaningful cross-station dependencies.</p>
+<hr>
+<h2>7. Splitting, Training, and Evaluation</h2>
+<h3>Q32. Why did you use chronological splitting?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because forecasting is inherently time-ordered, so training on the past and testing on the future is the most realistic setup.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Chronological splitting avoids temporal leakage and better reflects operational forecasting conditions. It is therefore the primary evaluation protocol in the proposal.</p>
+<h3>Q33. Why did you also mention random split?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>As a secondary reference to show how performance can look artificially better when temporal leakage is not controlled.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Random split is common in deep learning experiments, but in time-series forecasting it can mix similar overlapping windows between train and validation data. Comparing it with chronological split helps demonstrate why the stricter protocol is more trustworthy.</p>
+<h3>Q34. What optimizer and main training settings are proposed?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The proposal uses Adam, batch size 32, learning rate 0.05, maximum 300 epochs, and early stopping.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>These settings are consistent with the active implementation path. Early stopping and learning rate reduction are included to improve convergence stability and reduce overfitting risk.</p>
+<h3>Q35. What evaluation metrics will you use?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I will use MSE, MAE, and RMSE, reported per target variable and per forecast horizon step.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>These are standard regression metrics for multi-step forecasting. Reporting them separately by variable and horizon gives a clearer picture of where the model performs well and where performance degrades with lead time.</p>
+<h3>Q36. Why report metrics per horizon step?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because forecast quality usually changes as lead time increases.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>A 1-step forecast is usually easier than a 7-step forecast, so averaging everything into one score can hide important behavior. Per-horizon reporting makes the evaluation more informative and transparent.</p>
+<h3>Q37. Why include physical plausibility checks?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because a forecast can have acceptable numerical error while still being meteorologically unrealistic.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>In practical weather forecasting, plausibility matters in addition to error values. For example, a forecast should remain consistent with seasonal and regional expectations, not just minimize loss mathematically.</p>
+<hr>
+<h2>8. Baseline and Comparison</h2>
+<h3>Q38. What is your baseline comparison?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The main baseline is a distance-based STGCN using the same overall forecasting setup.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The purpose of the baseline is to isolate the effect of graph construction. If the architecture, data, and targets remain matched, then differences in performance can be more reasonably attributed to the graph definition itself.</p>
+<h3>Q38a. Is the Bhandari et al. (2024) paper your baseline model?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It is my literature benchmark and problem-reference paper, not the direct experimental baseline.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Bhandari et al. (2024) is very useful because it is recent, Nepal-specific, and graph-weather focused. However, their setup uses a different station count and focuses on graph-based imputation/classification with GraphSAGE/GNN variants. For a fair experiment in my project, the direct baseline should be a distance-based STGCN using the same 320-station data, targets, split, and metrics as my proposed correlation-based STGCN.</p>
+<h3>Q39. Why is this comparison important?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because it tests whether the proposed correlation graph adds value beyond a standard distance-based graph.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Without a matched baseline, it is difficult to argue that the graph design itself matters. This comparison directly addresses the central research question of the proposal.</p>
+<h3>Q40. Can you already claim that your method is definitively better?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Not yet as a final claim in the proposal stage.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>At the proposal stage, I present it as a motivated and testable hypothesis rather than a completed proof. The aim of the research is to implement, evaluate, and verify whether the correlation graph performs better under matched conditions.</p>
+<hr>
+<h2>9. Application Relevance</h2>
+<h3>Q41. How does this relate to crop recommendation?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>It provides the weather forecasting backbone that a crop recommendation system can use later.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal does not claim a fully implemented end-to-end crop recommendation engine at this stage. Instead, it focuses on improving the upstream weather inputs that such a system would depend on.</p>
+<h3>Q42. Why did you not position crop recommendation as the completed core contribution?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because the strongest current contribution is the forecasting framework, and that is the part directly supported by the implementation path.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>It is more defensible to present crop recommendation as future integration rather than overstate it as a validated finished module. This keeps the proposal scientifically honest and focused.</p>
+<h3>Q43. What kinds of agricultural decisions could eventually use these forecasts?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>They could support irrigation planning, crop suitability screening, disease-risk awareness, and short-term advisory services.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Forecasted minimum temperature, humidity, and precipitation can be mapped into practical categories such as frost risk, humidity regime, and rainfall condition. Those outputs can later feed crop rules, agronomic thresholds, or advisory models.</p>
+<hr>
+<h2>10. Limitations and Risks</h2>
+<h3>Q44. What are the main limitations of your proposed work?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The main limitations are reproducibility challenges, sensitivity to graph design choices, and the difficulty of forecasting precipitation in complex terrain.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Graph construction depends on the chosen signal and sparsification threshold, some data paths may require cleanup for reproducibility, and precipitation is inherently harder to predict than smoother variables. These are all important to acknowledge during defense.</p>
+<h3>Q45. Is correlation enough to represent all station relationships?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>No, it is a practical and transparent starting point, but not the only possible relationship measure.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Correlation captures co-variation well, but it does not capture every nonlinear or regime-dependent interaction. Future work could explore learned adjacency, multi-variable graphs, or attention-based extensions.</p>
+<h3>Q46. What if the panel asks why not use a learned adaptive adjacency matrix directly?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>A learned adjacency is powerful, but my proposal prioritizes interpretability and a physically grounded prior.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Fully learned graphs can be flexible, but they are also harder to interpret and may require more data to train reliably. My approach sits in the middle: it is data-driven, but still transparent and easy to explain scientifically.</p>
+<h3>Q47. What if they ask whether anti-correlation should really be treated as similarity?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I would say it is treated as relationship strength rather than same-direction similarity.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Using the absolute value means the graph captures stations that are strongly coupled, whether positively or negatively. I would also acknowledge that this is a modeling choice and that preserving sign information could be explored in future work.</p>
+<hr>
+<h2>11. Expected Outcomes and Contribution</h2>
+<h3>Q48. What are your expected methodological outcomes?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I expect to produce a clear and reproducible correlation-based graph construction strategy for complex terrain forecasting.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal aims to show that graph connectivity can be defined transparently from historical station behavior, not only from physical distance. That is the main methodological contribution.</p>
+<h3>Q49. What are your expected technical outcomes?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>I expect to produce a convergent 320-station STGCN forecasting pipeline for the selected target variables.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>This includes data preparation, graph construction, training, evaluation, and inference using the correlation-adaptive graph. The technical outcome is the full forecasting backbone rather than only a conceptual proposal.</p>
+<h3>Q50. What is the practical contribution of your work?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The practical contribution is a stronger weather forecasting foundation for future local advisory systems in mountainous terrain.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>Even before full crop recommendation is added, a better local forecast is already valuable. It can support future agricultural, planning, and risk-related applications that need more realistic station-level weather estimates.</p>
+<h3>Q51. What is your most defensible contribution statement?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My most defensible contribution is a correlation-adaptive graph-based forecasting framework for complex terrain, with crop recommendation framed as future integration.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>This statement is strong because it matches the technical focus, the revised proposal, and the evidence path of the project. It avoids overclaiming while still clearly stating the novelty and importance of the work.</p>
+<hr>
+<h2>12. Timeline and Closing</h2>
+<h3>Q52. What is your proposed timeline?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>The timeline covers data preprocessing and graph construction, baseline implementation, model training and tuning, comparative evaluation, and final thesis writing.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>In sequence, the work begins with preprocessing and graph creation, then baseline setup, then model training and analysis, followed by evaluation and thesis writing. This structure supports steady progress from data preparation to final defense.</p>
+<h3>Q53. Why is your work feasible within the proposed timeline?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>Because the methodology is clearly staged and the core modeling path is already well defined.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The project is not trying to solve every downstream application at once. By focusing first on the forecasting backbone, the work remains technically ambitious but still manageable within a thesis schedule.</p>
+<h3>Q54. If the panel asks for your final takeaway, what will you say?</h3>
+<p><strong>Short answer:</strong>  </p>
+<p>My final takeaway is that complex terrain needs functionally defined station relationships, and correlation-adaptive graph modeling is a promising way to build them.</p>
+<p><strong>Expanded answer:</strong>  </p>
+<p>The proposal argues that distance alone is too weak a basis for weather graphs in mountains. By building connectivity from historical meteorological similarity and using that inside an STGCN, the research aims to produce a more meaningful forecasting backbone for complex terrain and future agricultural decision support.</p>
+<hr>
+<h2>Very Short Viva Lines</h2>
+<p>Use these when you need a fast answer in one breath:</p>
+<ul>
+<li><code>Why this topic?</code> Because mountain weather changes sharply over short distances, so distance-based forecasting is often misleading.</li>
+<li><code>Main novelty?</code> I replace geographic proximity with correlation-based station connectivity.</li>
+<li><code>Main model?</code> A three-block STGCN over a correlation-adaptive weather graph.</li>
+<li><code>Targets?</code> <code>T2M_MIN</code>, <code>RH2M</code>, and <code>PRECTOTCORR</code>.</li>
+<li><code>Why chronological split?</code> Because forecasting must train on the past and test on the future.</li>
+<li><code>Why random split too?</code> As a comparison to show possible optimistic bias from temporal leakage.</li>
+<li><code>Main contribution?</code> A forecasting backbone for complex terrain, with crop recommendation as future integration.</li>
+</ul>
+</body>
+</html>
