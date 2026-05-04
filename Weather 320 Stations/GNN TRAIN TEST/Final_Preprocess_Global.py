@@ -198,8 +198,10 @@ if __name__ == '__main__':
     import os
     
     # Configuration
-    base_dir = r'c:\Users\abhis\Downloads\Weather 320 Stations-20260111T031707Z-1-001\Weather 320 Stations'
-    file_path = os.path.join(base_dir, 'Stations_320_Final.csv')
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Use the historical archive for correlation graph construction.
+    # The single-date station snapshot is not sufficient for time-series correlation.
+    file_path = os.path.join(base_dir, 'Weather_320_Stations_DB.csv')
     save_dir = os.path.join(base_dir, 'GNN TRAIN TEST', 'processed_data') 
     
     if not os.path.exists(save_dir):
